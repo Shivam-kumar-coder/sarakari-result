@@ -1,4 +1,4 @@
-
+src/app.tsx
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -213,17 +213,12 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
         <meta name="description" content="Sarkari Result - Get latest updates on Sarkari Results, Latest Jobs, Admit Cards, Syllabus, Answer Keys and Admissions. Official portal for government job seekers." />
       </Helmet>
       
-      {/* Official Banner - Fixed with better spacing */}
-      <div className="bg-gradient-to-b from-blue-50 to-white border-2 border-blue-200 p-6 text-center shadow-lg max-w-2xl mx-auto rounded-xl">
-        <h1 className="text-4xl md:text-6xl font-black text-blue-900 tracking-tighter uppercase mb-2">Sarkari Result</h1>
-        <p className="text-red-600 font-black text-xl md:text-2xl uppercase tracking-widest mb-2">www.sarkariresult.com</p>
-        <div className="w-24 h-1 bg-red-500 mx-auto my-3"></div>
-        <p className="text-gray-700 font-bold text-base md:text-lg">Official Portal for Latest Jobs, Results, and Admit Cards</p>
-        <div className="flex justify-center gap-4 mt-4 text-xs font-bold text-gray-500">
-          <span>✓ 100% Government Jobs</span>
-          <span>✓ Verified Updates</span>
-          <span>✓ Daily New Posts</span>
-        </div>
+      {/* Official Banner - Reduced height and padding */}
+      <div className="bg-gradient-to-b from-blue-50 to-white border-2 border-blue-200 p-3 text-center shadow-md max-w-2xl mx-auto rounded-lg">
+        <h1 className="text-2xl md:text-4xl font-black text-blue-900 tracking-tighter uppercase">Sarkari Result</h1>
+        <p className="text-red-600 font-black text-lg md:text-xl uppercase tracking-widest">www.sarkariresult.com</p>
+        <div className="w-16 h-0.5 bg-red-500 mx-auto my-2"></div>
+        <p className="text-gray-700 font-bold text-sm md:text-base">Official Portal for Latest Jobs, Results, and Admit Cards</p>
       </div>
 
       {/* Search Bar with Suggestions */}
@@ -311,8 +306,6 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
         <GridSection title="Latest Jobs" items={latestJobs} colorClass="bg-red-700" icon={Briefcase} />
       </div>
 
-      <TelegramJoin />
-
       {/* Useful Links Section */}
       <div className="bg-white border-2 border-gray-300 p-4 shadow-sm">
         <h3 className="text-blue-800 font-black text-lg uppercase border-b-2 border-gray-200 pb-2 mb-4">Useful Links & Services</h3>
@@ -347,9 +340,10 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
         ))}
       </div>
 
-      {/* WhatsApp Join Section - Moved to bottom, just above footer */}
-      <div className="mt-8 mb-4">
+      {/* WhatsApp and Telegram together at bottom */}
+      <div className="mt-8 space-y-4">
         <WhatsAppJoin />
+        <TelegramJoin />
       </div>
     </motion.div>
   );
@@ -361,6 +355,9 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
   const [showForm, setShowForm] = useState(false);
 
   if (!job) return <div className="text-center py-20">Job not found</div>;
+
+  // Fix for the URL - extract just the ID if it contains a domain
+  const cleanId = id?.includes('.') ? id.split('.')[0] : id;
 
   return (
     <motion.div 
@@ -534,6 +531,12 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
         </div>
 
         <ShareSection title={job.title} />
+        
+        {/* WhatsApp and Telegram together at bottom of detail page */}
+        <div className="space-y-4 mt-6">
+          <WhatsAppJoin />
+          <TelegramJoin />
+        </div>
       </div>
     </motion.div>
   );
@@ -574,9 +577,10 @@ const CategoryPage = ({ jobs, category }: { jobs: JobData[], category: string })
         </div>
       </div>
       
-      {/* WhatsApp Join Section - Moved to bottom, just above footer */}
-      <div className="mt-8 mb-4">
+      {/* WhatsApp and Telegram together at bottom of category page */}
+      <div className="mt-8 space-y-4">
         <WhatsAppJoin />
+        <TelegramJoin />
       </div>
     </motion.div>
   );
