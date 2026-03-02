@@ -1,7 +1,7 @@
 
 export interface JobData {
   id: string;
-  category: 'Result' | 'Admit Card' | 'Latest Job' | 'Answer Key' | 'Syllabus' | 'Admission' | 'Certificate Verification' | 'Important';
+  category: 'Result' | 'Admit Card' | 'Latest Job' | 'Answer Key' | 'Syllabus' | 'Admission' | 'Certificate Verification' | 'Important' | 'Useful Link';
   title: string;
   link: string;
   postDate: string;
@@ -14,6 +14,8 @@ export interface JobData {
   vacancyDetails?: string;
   howToFill?: string;
   extraInfo?: string;
+  notificationLink?: string;
+  officialWebsiteLink?: string;
 }
 
 // Mock data for initial development
@@ -31,7 +33,9 @@ export const mockJobs: JobData[] = [
     importantDates: '• Application Begin : 24/06/2024\n• Last Date for Apply Online : 24/07/2024\n• Last Date Pay Exam Fee : 25/07/2024\n• Correction Date : 10-11 August 2024\n• Exam Date Tier I : Sept/Oct 2024',
     vacancyDetails: 'Total Posts: 17727 (Approx)',
     howToFill: '• Staff Selection Commission SSC Are Released Combined Graduate Level CGL Recruitment 2024. Candidate Can Apply Between 24/06/2024 to 24/07/2024.\n• Candidate Read the Notification Before Apply the Recruitment Application Form in SSC CGL 2024.\n• Kindly Check and Collect the All Document - Eligibility, ID Proof, Address Details, Basic Details.\n• Kindly Ready Scan Document Related to Recruitment Form - Photo, Sign, ID Proof, Etc.\n• Before Submit the Application Form Must Check the Preview and All Column Carefully.\n• Take A Print Out of Final Submitted Form.',
-    extraInfo: 'The Staff Selection Commission will hold the Combined Graduate Level Examination, 2024 for filling up of various Group ‘B’ and Group ‘C’ posts in different Ministries/ Departments/ Organizations of Government of India and various Statutory/ Bodies/ Authorities/ Tribunals, etc.'
+    extraInfo: 'The Staff Selection Commission will hold the Combined Graduate Level Examination, 2024 for filling up of various Group ‘B’ and Group ‘C’ posts in different Ministries/ Departments/ Organizations of Government of India and various Statutory/ Bodies/ Authorities/ Tribunals, etc.',
+    notificationLink: 'https://www.sarkariresult.com',
+    officialWebsiteLink: 'https://ssc.nic.in'
   },
   {
     id: '2',
@@ -42,7 +46,9 @@ export const mockJobs: JobData[] = [
     shortInfo: 'Uttar Pradesh Recruitment and Promotion Board (UPPRPB) has declared the result for Constable posts. Candidates can check their result using the link below.',
     eligibility: '• 10+2 Intermediate Exam in Any Recognized Board in India.',
     vacancyDetails: '60244 Posts',
-    extraInfo: 'UPPRPB Constable Recruitment 2023-24 Result has been announced. Candidates who appeared in the written exam can now download their result and check their status for the next stage of recruitment.'
+    extraInfo: 'UPPRPB Constable Recruitment 2023-24 Result has been announced. Candidates who appeared in the written exam can now download their result and check their status for the next stage of recruitment.',
+    notificationLink: 'https://www.sarkariresult.com',
+    officialWebsiteLink: 'https://uppbpb.gov.in'
   },
   {
     id: '3',
@@ -54,7 +60,25 @@ export const mockJobs: JobData[] = [
     eligibility: '• Bachelor Degree in Any Stream.',
     importantDates: '• Exam Date : 16/06/2024\n• Admit Card Available : 07/06/2024',
     howToFill: '• Visit the official UPSC website.\n• Click on the Civil Services Admit Card link.\n• Enter your Registration ID or Roll Number.\n• Download and print the admit card.',
-    extraInfo: 'The UPSC Civil Services Examination is conducted in three stages: Preliminary, Main, and Interview. The Preliminary exam is the first step towards joining the prestigious Indian Administrative Service (IAS), Indian Foreign Service (IFS), and Indian Police Service (IPS).'
+    extraInfo: 'The UPSC Civil Services Examination is conducted in three stages: Preliminary, Main, and Interview. The Preliminary exam is the first step towards joining the prestigious Indian Administrative Service (IAS), Indian Foreign Service (IFS), and Indian Police Service (IPS).',
+    notificationLink: 'https://www.sarkariresult.com',
+    officialWebsiteLink: 'https://upsc.gov.in'
+  },
+  {
+    id: '4',
+    category: 'Useful Link',
+    title: 'Apply for PAN Card Online',
+    link: 'https://www.onlineservices.nsdl.com/paam/endUserRegisterContact.html',
+    postDate: '2024-01-01',
+    shortInfo: 'Apply for new PAN card or correction in existing PAN card.'
+  },
+  {
+    id: '5',
+    category: 'Useful Link',
+    title: 'Voter ID Registration',
+    link: 'https://voters.eci.gov.in/',
+    postDate: '2024-01-01',
+    shortInfo: 'Register as a new voter or update voter details.'
   }
 ];
 
@@ -89,7 +113,9 @@ export async function fetchSheetData(sheetId: string): Promise<JobData[]> {
         importantDates: values[9] || '',
         vacancyDetails: values[10] || '',
         howToFill: values[11] || '',
-        extraInfo: values[12] || ''
+        extraInfo: values[12] || '',
+        notificationLink: values[13] || '',
+        officialWebsiteLink: values[14] || ''
       };
     });
 
