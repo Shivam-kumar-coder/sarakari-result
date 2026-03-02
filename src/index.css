@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-sarkari-red: #ff0000;
+  --color-sarkari-blue: #0000ff;
+  --color-sarkari-green: #008000;
+
+  @keyframes marquee {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+  }
+  --animate-marquee: marquee 30s linear infinite;
+}
+
+body {
+  background-color: #f0f2f5;
+  color: #1a1a1a;
+}
+
+.sarkari-card {
+  @apply bg-white border border-gray-200 rounded shadow-sm overflow-hidden;
+}
+
+.sarkari-header {
+  @apply text-white font-bold py-1 px-3 text-sm uppercase tracking-wider;
+}
+
