@@ -206,14 +206,14 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
       className="space-y-6"
     >
       <Helmet>
-        <title>Sarkari Result 2024 - Latest Jobs, Admit Card, Results</title>
+        <title>Sarkari Result - Latest Jobs, Admit Card, Results</title>
         <meta name="description" content="Sarkari Result - Get latest updates on Sarkari Results, Latest Jobs, Admit Cards, Syllabus, Answer Keys and Admissions. Official portal for government job seekers." />
       </Helmet>
       {/* Official Banner */}
       <div className="bg-white border-2 border-gray-300 p-4 text-center shadow-sm">
         <h1 className="text-3xl md:text-5xl font-black text-blue-800 tracking-tighter uppercase">Sarkari Result</h1>
-        <p className="text-red-600 font-bold text-lg uppercase tracking-widest">www.sarkariresult.com</p>
-        <p className="text-gray-600 font-bold text-sm mt-2 italic">Official Portal for Latest Jobs, Results, and Admit Cards</p>
+        <p className="text-red-300 font-bold text-lg uppercase tracking-widest">www.sarkariresult.com</p>
+        <p className="text-gray-300 font-bold text-sm mt-2 italic">Official Portal for Latest Jobs, Results, and Admit Cards</p>
       </div>
 
       {/* Search Bar with Suggestions */}
