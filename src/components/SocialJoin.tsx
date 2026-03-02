@@ -16,7 +16,7 @@ export const WhatsAppJoin = () => {
         </div>
         
         <a 
-          href="https://chat.whatsapp.com/your-group-link" 
+          href="https://chat.whatsapp.com/IxNy4YHVf6KBOJwbWIrlfF?mode=hqctswa" 
           target="_blank" 
           rel="noopener noreferrer"
           className="bg-white text-green-600 px-6 py-3 rounded-full font-bold flex items-center gap-2 hover:bg-green-50 transition-colors shadow-md whitespace-nowrap"
