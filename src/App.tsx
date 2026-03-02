@@ -475,7 +475,7 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 p-4 gap-4 items-center">
               <div className="flex flex-col md:flex-row gap-4 items-center justify-center w-full">
                 <a 
-                  href={job.link && job.link !== '#' ? job.link : 'https://www.sarkariresult.com'} 
+                  href={job.link && job.link !== '#' ? job.link : 'https://'} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="bg-blue-700 hover:bg-blue-800 text-white font-black px-6 py-3 rounded text-sm uppercase tracking-widest flex items-center gap-2 shadow-md w-full md:w-auto justify-center"
