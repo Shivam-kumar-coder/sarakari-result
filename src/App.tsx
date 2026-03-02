@@ -1,4 +1,4 @@
-
+src/app.tsx
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -128,8 +128,9 @@ const Footer = () => (
   </footer>
 );
 
+// GridSection with increased height
 const GridSection = ({ title, items, colorClass, icon: Icon }: { title: string, items: JobData[], colorClass: string, icon: any }) => (
-  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow h-[500px] flex flex-col">
     <div className={`${colorClass} px-5 py-4 flex items-center justify-between`}>
       <div className="flex items-center gap-2 text-white">
         <Icon size={20} />
@@ -139,8 +140,8 @@ const GridSection = ({ title, items, colorClass, icon: Icon }: { title: string, 
         {items.length} Updates
       </span>
     </div>
-    <div className="divide-y divide-gray-50">
-      {items.slice(0, 5).map((item) => (
+    <div className="divide-y divide-gray-50 flex-1 overflow-y-auto">
+      {items.slice(0, 8).map((item) => (
         <Link 
           key={item.id} 
           to={`/details/${item.id}`}
@@ -213,12 +214,12 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
         <meta name="description" content="Sarkari Result - Get latest updates on Sarkari Results, Latest Jobs, Admit Cards, Syllabus, Answer Keys and Admissions. Official portal for government job seekers." />
       </Helmet>
       
-      {/* Official Banner - Full width */}
-      <div className="bg-gradient-to-b from-blue-50 to-white border-2 border-blue-200 p-4 md:p-6 text-center shadow-md w-full rounded-lg">
-        <h1 className="text-2xl md:text-4xl font-black text-blue-900 tracking-tighter uppercase">Sarkari Result</h1>
-        <p className="text-red-600 font-black text-lg md:text-xl uppercase tracking-widest">www.sarkariresult.com</p>
-        <div className="w-16 h-0.5 bg-red-500 mx-auto my-2"></div>
-        <p className="text-gray-700 font-bold text-sm md:text-base">Official Portal for Latest Jobs, Results, and Admit Cards</p>
+      {/* Official Banner - Height reduced */}
+      <div className="bg-gradient-to-b from-blue-50 to-white border-2 border-blue-200 py-2 px-4 text-center shadow-md max-w-2xl mx-auto rounded-lg">
+        <h1 className="text-xl md:text-3xl font-black text-blue-900 tracking-tighter uppercase">Sarkari Result</h1>
+        <p className="text-red-600 font-black text-base md:text-lg uppercase tracking-widest">www.sarkariresult.com</p>
+        <div className="w-12 h-0.5 bg-red-500 mx-auto my-1"></div>
+        <p className="text-gray-700 font-bold text-xs md:text-sm">Official Portal for Latest Jobs, Results, and Admit Cards</p>
       </div>
 
       {/* Search Bar with Suggestions */}
@@ -300,40 +301,25 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
         </div>
       </div>
 
+      {/* Grid Sections - Height increased to 500px */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <GridSection title="Results" items={results} colorClass="bg-green-700" icon={FileText} />
         <GridSection title="Admit Card" items={admitCards} colorClass="bg-blue-700" icon={CreditCard} />
         <GridSection title="Latest Jobs" items={latestJobs} colorClass="bg-red-700" icon={Briefcase} />
       </div>
 
-      {/* Useful Links Section - Full Width with bigger box */}
-      <div className="bg-white border-2 border-gray-300 p-6 shadow-sm w-full">
-        <h3 className="text-blue-800 font-black text-xl uppercase border-b-2 border-gray-200 pb-3 mb-4">Useful Links & Services</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-base font-bold">
-          <Link to="/syllabus" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
-            <span className="w-2 h-2 bg-blue-600 rounded-full"></span> Exam Syllabus
-          </Link>
-          <Link to="/answer-key" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
-            <span className="w-2 h-2 bg-green-600 rounded-full"></span> Answer Keys
-          </Link>
-          <Link to="/admission" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
-            <span className="w-2 h-2 bg-purple-600 rounded-full"></span> Admission Form
-          </Link>
-          <Link to="/important" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
-            <span className="w-2 h-2 bg-red-600 rounded-full"></span> Important Links
-          </Link>
-          <Link to="/certificate" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
-            <span className="w-2 h-2 bg-yellow-600 rounded-full"></span> Certificate Verification
-          </Link>
-          <Link to="/pan-card" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
-            <span className="w-2 h-2 bg-orange-600 rounded-full"></span> PAN Card Online
-          </Link>
-          <Link to="/voter-id" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
-            <span className="w-2 h-2 bg-indigo-600 rounded-full"></span> Voter ID Online
-          </Link>
-          <Link to="/contact" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
-            <span className="w-2 h-2 bg-pink-600 rounded-full"></span> Contact Us
-          </Link>
+      {/* Useful Links Section - Original style restored */}
+      <div className="bg-white border-2 border-gray-300 p-4 shadow-sm">
+        <h3 className="text-blue-800 font-black text-lg uppercase border-b-2 border-gray-200 pb-2 mb-4">Useful Links & Services</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm font-bold">
+          <Link to="/syllabus" className="text-blue-700 hover:underline">• Exam Syllabus</Link>
+          <Link to="/answer-key" className="text-blue-700 hover:underline">• Answer Keys</Link>
+          <Link to="/admission" className="text-blue-700 hover:underline">• Admission Form</Link>
+          <Link to="/important" className="text-blue-700 hover:underline">• Important Links</Link>
+          <Link to="/certificate" className="text-blue-700 hover:underline">• Certificate Verification</Link>
+          <Link to="/pan-card" className="text-blue-700 hover:underline">• PAN Card Online</Link>
+          <Link to="/voter-id" className="text-blue-700 hover:underline">• Voter ID Online</Link>
+          <Link to="/contact" className="text-blue-700 hover:underline">• Contact Us</Link>
         </div>
       </div>
 
@@ -341,14 +327,14 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {['Answer Key', 'Syllabus', 'Admission', 'Important'].map((cat) => (
           <div key={cat} className="bg-white border-2 border-gray-300 overflow-hidden shadow-sm">
-            <h3 className="bg-gray-800 text-white font-black uppercase tracking-widest text-sm p-3 text-center">{cat}</h3>
-            <div className="p-4 space-y-3">
+            <h3 className="bg-gray-800 text-white font-black uppercase tracking-widest text-xs p-2 text-center">{cat}</h3>
+            <div className="p-3 space-y-2">
               {jobs.filter(j => j.category === cat).slice(0, 5).map(item => (
-                <Link key={item.id} to={`/details/${item.id}`} className="block text-sm font-bold text-blue-700 hover:underline truncate border-b border-gray-100 pb-2 last:border-0">
+                <Link key={item.id} to={`/details/${item.id}`} className="block text-xs font-bold text-blue-700 hover:underline truncate border-b border-gray-100 pb-1 last:border-0">
                   {item.title}
                 </Link>
               ))}
-              <Link to={`/${cat.toLowerCase()}`} className="block text-xs font-black text-gray-500 uppercase mt-3 text-center hover:text-blue-600 transition-colors bg-gray-50 py-2 rounded">
+              <Link to={`/${cat.toLowerCase()}`} className="block text-[10px] font-black text-gray-400 uppercase mt-2 text-center hover:text-blue-600 transition-colors">
                 View All {cat} &rarr;
               </Link>
             </div>
@@ -505,11 +491,6 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="bg-blue-700 hover:bg-blue-800 text-white font-black px-6 py-3 rounded text-sm uppercase tracking-widest flex items-center gap-2 shadow-md w-full md:w-auto justify-center transition-all hover:scale-105"
-                  onClick={(e) => {
-                    if (applyLink === 'https://www.sarkariresult.com') {
-                      console.log('Using default link');
-                    }
-                  }}
                 >
                   Apply Online <ExternalLink size={16} />
                 </a>
