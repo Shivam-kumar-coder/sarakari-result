@@ -1,3 +1,4 @@
+src/app.tsx
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -89,6 +90,7 @@ const Header = () => {
               <Link onClick={() => setIsMenuOpen(false)} to="/latest-jobs" className="block text-gray-600 font-medium">Latest Jobs</Link>
               <Link onClick={() => setIsMenuOpen(false)} to="/results" className="block text-gray-600 font-medium">Results</Link>
               <Link onClick={() => setIsMenuOpen(false)} to="/admit-cards" className="block text-gray-600 font-medium">Admit Card</Link>
+              <Link onClick={() => setIsMenuOpen(false)} to="/contact" className="block text-gray-600 font-medium">Contact</Link>
             </div>
           </motion.div>
         )}
@@ -111,6 +113,7 @@ const Footer = () => (
           <li><Link to="/latest-jobs" className="hover:text-white">Latest Jobs</Link></li>
           <li><Link to="/results" className="hover:text-white">Results</Link></li>
           <li><Link to="/admit-cards" className="hover:text-white">Admit Card</Link></li>
+          <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
         </ul>
       </div>
       <div>
@@ -209,11 +212,18 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
         <title>Sarkari Result - Latest Jobs, Admit Card, Results</title>
         <meta name="description" content="Sarkari Result - Get latest updates on Sarkari Results, Latest Jobs, Admit Cards, Syllabus, Answer Keys and Admissions. Official portal for government job seekers." />
       </Helmet>
-      {/* Official Banner */}
-      <div className="bg-white border-2 border-gray-300 p-4 text-center shadow-sm max-w-md mx-auto">
-       <h1 className="text-3xl md:text-5xl font-black text-blue-800 tracking-tighter uppercase">Sarkari Result</h1>
-        <p className="text-red-600 font-bold text-lg uppercase tracking-widest">www.sarkariresult.com</p>
-        <p className="text-gray-600 font-bold text-sm mt-2 italic">Official Portal for Latest Jobs, Results, and Admit Cards</p>
+      
+      {/* Official Banner - Fixed with better spacing */}
+      <div className="bg-gradient-to-b from-blue-50 to-white border-2 border-blue-200 p-6 text-center shadow-lg max-w-2xl mx-auto rounded-xl">
+        <h1 className="text-4xl md:text-6xl font-black text-blue-900 tracking-tighter uppercase mb-2">Sarkari Result</h1>
+        <p className="text-red-600 font-black text-xl md:text-2xl uppercase tracking-widest mb-2">www.sarkariresult.com</p>
+        <div className="w-24 h-1 bg-red-500 mx-auto my-3"></div>
+        <p className="text-gray-700 font-bold text-base md:text-lg">Official Portal for Latest Jobs, Results, and Admit Cards</p>
+        <div className="flex justify-center gap-4 mt-4 text-xs font-bold text-gray-500">
+          <span>✓ 100% Government Jobs</span>
+          <span>✓ Verified Updates</span>
+          <span>✓ Daily New Posts</span>
+        </div>
       </div>
 
       {/* Search Bar with Suggestions */}
@@ -275,13 +285,16 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
         </AnimatePresence>
       </div>
 
-      <WhatsAppJoin />
-
       {/* Marquee Area */}
       <div id="updates" className="bg-white border-2 border-gray-300 py-2 overflow-hidden whitespace-nowrap shadow-sm flex items-center">
         <div className="bg-red-600 text-white px-4 py-1 font-black text-xs uppercase tracking-widest ml-4 rounded z-10 shadow-md">Updates</div>
         <div className="animate-marquee inline-block">
-          <a href="https://chat.whatsapp.com/your-group-id" target="_blank" rel="noopener noreferrer" className="mx-8 font-black text-sm text-green-600 hover:text-green-700 flex items-center gap-1">
+          <a 
+            href="https://chat.whatsapp.com/your-group-id" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="mx-8 font-black text-sm text-green-600 hover:text-green-700 flex items-center gap-1"
+          >
             <MessageCircle size={14} /> Join Our WhatsApp Group For Latest Updates! <span className="text-red-500 ml-1">New!</span>
           </a>
           {jobs.map(j => (
@@ -332,6 +345,11 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* WhatsApp Join Section - Moved to bottom, just above footer */}
+      <div className="mt-8 mb-4">
+        <WhatsAppJoin />
       </div>
     </motion.div>
   );
@@ -460,7 +478,7 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 p-4 gap-4 items-center">
               <div className="flex flex-col md:flex-row gap-4 items-center justify-center w-full">
                 <a 
-                  href={job.link} 
+                  href={job.link && job.link !== '#' ? job.link : 'https://www.sarkariresult.com'} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="bg-blue-700 hover:bg-blue-800 text-white font-black px-6 py-3 rounded text-sm uppercase tracking-widest flex items-center gap-2 shadow-md w-full md:w-auto justify-center"
@@ -495,10 +513,20 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
             </AnimatePresence>
 
             <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-              <a href="#" className="text-blue-700 font-bold hover:underline flex items-center gap-2 justify-center md:justify-start">
+              <a 
+                href={job.link && job.link !== '#' ? job.link : 'https://www.sarkariresult.com'} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-700 font-bold hover:underline flex items-center gap-2 justify-center md:justify-start"
+              >
                 <FileText size={16} /> Download Official Notification
               </a>
-              <a href="#" className="text-blue-700 font-bold hover:underline flex items-center gap-2 justify-center md:justify-start">
+              <a 
+                href="https://www.sarkariresult.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-700 font-bold hover:underline flex items-center gap-2 justify-center md:justify-start"
+              >
                 <Home size={16} /> Official Website
               </a>
             </div>
@@ -506,7 +534,6 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
         </div>
 
         <ShareSection title={job.title} />
-        <WhatsAppJoin />
       </div>
     </motion.div>
   );
@@ -546,7 +573,11 @@ const CategoryPage = ({ jobs, category }: { jobs: JobData[], category: string })
           )}
         </div>
       </div>
-      <WhatsAppJoin />
+      
+      {/* WhatsApp Join Section - Moved to bottom, just above footer */}
+      <div className="mt-8 mb-4">
+        <WhatsAppJoin />
+      </div>
     </motion.div>
   );
 };
