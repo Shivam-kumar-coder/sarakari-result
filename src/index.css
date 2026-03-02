@@ -10,7 +10,12 @@
     from { transform: translateX(100%); }
     to { transform: translateX(-100%); }
   }
+  @keyframes marquee-vertical {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100%); }
+  }
   --animate-marquee: marquee 30s linear infinite;
+  --animate-marquee-vertical: marquee-vertical 20s linear infinite;
 }
 
 body {
