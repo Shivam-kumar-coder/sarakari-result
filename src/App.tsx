@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useParams, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -90,7 +89,6 @@ const Header = () => {
               <Link onClick={() => setIsMenuOpen(false)} to="/latest-jobs" className="block text-gray-600 font-medium">Latest Jobs</Link>
               <Link onClick={() => setIsMenuOpen(false)} to="/results" className="block text-gray-600 font-medium">Results</Link>
               <Link onClick={() => setIsMenuOpen(false)} to="/admit-cards" className="block text-gray-600 font-medium">Admit Card</Link>
-              <Link onClick={() => setIsMenuOpen(false)} to="/contact" className="block text-gray-600 font-medium">Contact</Link>
             </div>
           </motion.div>
         )}
@@ -101,36 +99,40 @@ const Header = () => {
 
 const Footer = () => (
   <footer className="bg-gray-900 text-gray-400 py-12 mt-12">
-    <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div>
-        <h3 className="text-white font-bold text-lg mb-4 italic">Sarkari Result Clone</h3>
-        <p className="text-sm">Providing latest updates on government jobs, results, and admit cards. All information is gathered from official sources.</p>
+    <div className="max-w-7xl mx-auto px-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <WhatsAppJoin />
+        <TelegramJoin />
       </div>
-      <div>
-        <h3 className="text-white font-bold text-lg mb-4">Quick Links</h3>
-        <ul className="space-y-2 text-sm">
-          <li><Link to="/" className="hover:text-white">Home</Link></li>
-          <li><Link to="/latest-jobs" className="hover:text-white">Latest Jobs</Link></li>
-          <li><Link to="/results" className="hover:text-white">Results</Link></li>
-          <li><Link to="/admit-cards" className="hover:text-white">Admit Card</Link></li>
-          <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
-        </ul>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 className="text-white font-bold text-lg mb-4 italic">Sarkari Result Clone</h3>
+          <p className="text-sm">Providing latest updates on government jobs, results, and admit cards. All information is gathered from official sources.</p>
+        </div>
+        <div>
+          <h3 className="text-white font-bold text-lg mb-4">Quick Links</h3>
+          <ul className="space-y-2 text-sm">
+            <li><Link to="/" className="hover:text-white">Home</Link></li>
+            <li><Link to="/latest-jobs" className="hover:text-white">Latest Jobs</Link></li>
+            <li><Link to="/results" className="hover:text-white">Results</Link></li>
+            <li><Link to="/admit-cards" className="hover:text-white">Admit Card</Link></li>
+          </ul>
+        </div>
+        <div>
+          <h3 className="text-white font-bold text-lg mb-4">Contact</h3>
+          <p className="text-sm">Email: support@sarkariresultclone.com</p>
+          <p className="text-sm mt-2">Follow us on social media for instant updates.</p>
+        </div>
       </div>
-      <div>
-        <h3 className="text-white font-bold text-lg mb-4">Contact</h3>
-        <p className="text-sm">Email: support@sarkariresultclone.com</p>
-        <p className="text-sm mt-2">Follow us on social media for instant updates.</p>
+      <div className="mt-8 pt-8 border-t border-gray-800 text-center text-xs">
+        &copy; {new Date().getFullYear()} Sarkari Result Clone. All Rights Reserved.
       </div>
-    </div>
-    <div className="max-w-7xl mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-xs">
-      &copy; {new Date().getFullYear()} Sarkari Result Clone. All Rights Reserved.
     </div>
   </footer>
 );
 
-// GridSection with increased height
 const GridSection = ({ title, items, colorClass, icon: Icon }: { title: string, items: JobData[], colorClass: string, icon: any }) => (
-  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow h-[500px] flex flex-col">
+  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
     <div className={`${colorClass} px-5 py-4 flex items-center justify-between`}>
       <div className="flex items-center gap-2 text-white">
         <Icon size={20} />
@@ -140,8 +142,8 @@ const GridSection = ({ title, items, colorClass, icon: Icon }: { title: string, 
         {items.length} Updates
       </span>
     </div>
-    <div className="divide-y divide-gray-50 flex-1 overflow-y-auto">
-      {items.slice(0, 8).map((item) => (
+    <div className="divide-y divide-gray-50">
+      {items.slice(0, 15).map((item) => (
         <Link 
           key={item.id} 
           to={`/details/${item.id}`}
@@ -210,16 +212,13 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
       className="space-y-6"
     >
       <Helmet>
-        <title>Sarkari Result - Latest Jobs, Admit Card, Results</title>
+        <title>Sarkari Result 2024 - Latest Jobs, Admit Card, Results</title>
         <meta name="description" content="Sarkari Result - Get latest updates on Sarkari Results, Latest Jobs, Admit Cards, Syllabus, Answer Keys and Admissions. Official portal for government job seekers." />
       </Helmet>
-      
-      {/* Official Banner - Height reduced */}
-      <div className="bg-gradient-to-b from-blue-50 to-white border-2 border-blue-200 py-2 px-4 text-center shadow-md max-w-2xl mx-auto rounded-lg">
-        <h1 className="text-xl md:text-3xl font-black text-blue-900 tracking-tighter uppercase">Sarkari Result</h1>
-        <p className="text-red-600 font-black text-base md:text-lg uppercase tracking-widest">www.sarkariresult.com</p>
-        <div className="w-12 h-0.5 bg-red-500 mx-auto my-1"></div>
-        <p className="text-gray-700 font-bold text-xs md:text-sm">Official Portal for Latest Jobs, Results, and Admit Cards</p>
+      {/* Official Banner */}
+      <div className="bg-white border-2 border-gray-300 p-2 text-center shadow-sm">
+        <h1 className="text-2xl md:text-3xl font-black text-blue-800 tracking-tighter uppercase leading-tight">Sarkari Result</h1>
+        <p className="text-red-600 font-bold text-sm uppercase tracking-widest">www.sarkariresult.com</p>
       </div>
 
       {/* Search Bar with Suggestions */}
@@ -281,56 +280,63 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
         </AnimatePresence>
       </div>
 
-      {/* Marquee Area */}
-      <div id="updates" className="bg-white border-2 border-gray-300 py-2 overflow-hidden whitespace-nowrap shadow-sm flex items-center">
-        <div className="bg-red-600 text-white px-4 py-1 font-black text-xs uppercase tracking-widest ml-4 rounded z-10 shadow-md">Updates</div>
-        <div className="animate-marquee inline-block">
-          <a 
-            href="https://chat.whatsapp.com/your-group-id" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="mx-8 font-black text-sm text-green-600 hover:text-green-700 flex items-center gap-1"
-          >
-            <MessageCircle size={14} /> Join Our WhatsApp Group For Latest Updates! <span className="text-red-500 ml-1">New!</span>
-          </a>
-          {jobs.slice(0, 10).map(j => (
-            <Link key={j.id} to={`/details/${j.id}`} className="mx-8 font-bold text-sm text-blue-700 hover:text-red-600 transition-colors">
-              {j.title} <span className="text-red-500 ml-1">New!</span>
-            </Link>
-          ))}
+      {/* Updates Area */}
+      <div id="updates" className="bg-white border-2 border-gray-300 shadow-sm flex flex-col md:flex-row">
+        <div className="bg-red-600 text-white px-4 py-2 font-black text-xs uppercase tracking-widest flex items-center justify-center md:min-w-[120px]">
+          Latest Updates
+        </div>
+        <div className="flex-grow h-32 md:h-40 overflow-hidden relative bg-gray-50">
+          <div className="animate-marquee-vertical py-2">
+            {jobs.slice(0, 10).map(j => (
+              <Link 
+                key={j.id} 
+                to={`/details/${j.id}`} 
+                className="block px-4 py-1.5 font-bold text-sm text-blue-700 hover:text-red-600 transition-colors border-b border-gray-100 last:border-0"
+              >
+                • {j.title} <span className="text-red-500 ml-1 text-[10px] animate-pulse">New!</span>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Grid Sections - Height increased to 500px */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <GridSection title="Results" items={results} colorClass="bg-green-700" icon={FileText} />
         <GridSection title="Admit Card" items={admitCards} colorClass="bg-blue-700" icon={CreditCard} />
         <GridSection title="Latest Jobs" items={latestJobs} colorClass="bg-red-700" icon={Briefcase} />
       </div>
 
-      {/* Useful Links Section - Original style restored */}
+      {/* Useful Links Section */}
       <div className="bg-white border-2 border-gray-300 p-4 shadow-sm">
         <h3 className="text-blue-800 font-black text-lg uppercase border-b-2 border-gray-200 pb-2 mb-4">Useful Links & Services</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm font-bold">
-          <Link to="/syllabus" className="text-blue-700 hover:underline">• Exam Syllabus</Link>
-          <Link to="/answer-key" className="text-blue-700 hover:underline">• Answer Keys</Link>
-          <Link to="/admission" className="text-blue-700 hover:underline">• Admission Form</Link>
-          <Link to="/important" className="text-blue-700 hover:underline">• Important Links</Link>
-          <Link to="/certificate" className="text-blue-700 hover:underline">• Certificate Verification</Link>
-          <Link to="/pan-card" className="text-blue-700 hover:underline">• PAN Card Online</Link>
-          <Link to="/voter-id" className="text-blue-700 hover:underline">• Voter ID Online</Link>
-          <Link to="/contact" className="text-blue-700 hover:underline">• Contact Us</Link>
+          {jobs.filter(j => j.category === 'Useful Link').length > 0 ? (
+            jobs.filter(j => j.category === 'Useful Link').map(link => (
+              <a key={link.id} href={link.link} target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:underline">• {link.title}</a>
+            ))
+          ) : (
+            <>
+              <Link to="/syllabus" className="text-blue-700 hover:underline">• Exam Syllabus</Link>
+              <Link to="/answer-key" className="text-blue-700 hover:underline">• Answer Keys</Link>
+              <Link to="/admission" className="text-blue-700 hover:underline">• Admission Form</Link>
+              <Link to="/important" className="text-blue-700 hover:underline">• Important Links</Link>
+              <Link to="/certificate" className="text-blue-700 hover:underline">• Certificate Verification</Link>
+              <Link to="/pan-card" className="text-blue-700 hover:underline">• PAN Card Online</Link>
+              <Link to="/voter-id" className="text-blue-700 hover:underline">• Voter ID Online</Link>
+              <Link to="/contact" className="text-blue-700 hover:underline">• Contact Us</Link>
+            </>
+          )}
         </div>
       </div>
 
-      {/* Additional Sections - With 5 items limit */}
+      {/* Additional Sections */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {['Answer Key', 'Syllabus', 'Admission', 'Important'].map((cat) => (
           <div key={cat} className="bg-white border-2 border-gray-300 overflow-hidden shadow-sm">
             <h3 className="bg-gray-800 text-white font-black uppercase tracking-widest text-xs p-2 text-center">{cat}</h3>
             <div className="p-3 space-y-2">
               {jobs.filter(j => j.category === cat).slice(0, 5).map(item => (
-                <Link key={item.id} to={`/details/${item.id}`} className="block text-xs font-bold text-blue-700 hover:underline truncate border-b border-gray-100 pb-1 last:border-0">
+                <Link key={item.id} to={`/details/${item.id}`} className="block text-xs font-bold text-blue-700 hover:underline truncate">
                   {item.title}
                 </Link>
               ))}
@@ -340,12 +346,6 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
             </div>
           </div>
         ))}
-      </div>
-
-      {/* WhatsApp and Telegram together at bottom */}
-      <div className="mt-8 space-y-4">
-        <WhatsAppJoin />
-        <TelegramJoin />
       </div>
     </motion.div>
   );
@@ -357,19 +357,6 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
   const [showForm, setShowForm] = useState(false);
 
   if (!job) return <div className="text-center py-20">Job not found</div>;
-
-  // Proper URL generate karne ka function
-  const getApplyLink = () => {
-    if (job.link && job.link !== '#' && job.link !== '') {
-      if (job.link.startsWith('http://') || job.link.startsWith('https://')) {
-        return job.link;
-      }
-      return `https://${job.link}`;
-    }
-    return 'https://www.sarkariresult.com';
-  };
-
-  const applyLink = getApplyLink();
 
   return (
     <motion.div 
@@ -487,16 +474,16 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 p-4 gap-4 items-center">
               <div className="flex flex-col md:flex-row gap-4 items-center justify-center w-full">
                 <a 
-                  href={applyLink}
+                  href={job.link} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="bg-blue-700 hover:bg-blue-800 text-white font-black px-6 py-3 rounded text-sm uppercase tracking-widest flex items-center gap-2 shadow-md w-full md:w-auto justify-center transition-all hover:scale-105"
+                  className="bg-blue-700 hover:bg-blue-800 text-white font-black px-6 py-3 rounded text-sm uppercase tracking-widest flex items-center gap-2 shadow-md w-full md:w-auto justify-center"
                 >
                   Apply Online <ExternalLink size={16} />
                 </a>
                 <button 
                   onClick={() => setShowForm(!showForm)}
-                  className="bg-red-600 hover:bg-red-700 text-white font-black px-6 py-3 rounded text-sm uppercase tracking-widest flex items-center gap-2 shadow-md w-full md:w-auto justify-center transition-all hover:scale-105"
+                  className="bg-red-600 hover:bg-red-700 text-white font-black px-6 py-3 rounded text-sm uppercase tracking-widest flex items-center gap-2 shadow-md w-full md:w-auto justify-center"
                 >
                   {showForm ? "Close Form" : "Form Fillup Request"} <Search size={16} />
                 </button>
@@ -523,18 +510,18 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
 
             <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
               <a 
-                href={applyLink}
+                href={job.notificationLink || "#"} 
                 target="_blank" 
-                rel="noopener noreferrer"
-                className="text-blue-700 font-bold hover:underline flex items-center gap-2 justify-center md:justify-start transition-colors"
+                rel="noopener noreferrer" 
+                className="text-blue-700 font-bold hover:underline flex items-center gap-2 justify-center md:justify-start"
               >
                 <FileText size={16} /> Download Official Notification
               </a>
               <a 
-                href="https://www.sarkariresult.com" 
+                href={job.officialWebsiteLink || "#"} 
                 target="_blank" 
-                rel="noopener noreferrer"
-                className="text-blue-700 font-bold hover:underline flex items-center gap-2 justify-center md:justify-start transition-colors"
+                rel="noopener noreferrer" 
+                className="text-blue-700 font-bold hover:underline flex items-center gap-2 justify-center md:justify-start"
               >
                 <Home size={16} /> Official Website
               </a>
@@ -543,12 +530,6 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
         </div>
 
         <ShareSection title={job.title} />
-        
-        {/* WhatsApp and Telegram together at bottom of detail page */}
-        <div className="space-y-4 mt-6">
-          <WhatsAppJoin />
-          <TelegramJoin />
-        </div>
       </div>
     </motion.div>
   );
@@ -572,27 +553,23 @@ const CategoryPage = ({ jobs, category }: { jobs: JobData[], category: string })
           {category} Updates
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredJobs.slice(0, 10).map(job => (
-            <Link 
-              key={job.id} 
-              to={`/details/${job.id}`} 
-              className="block p-3 border border-gray-200 hover:bg-gray-50 transition-colors rounded shadow-sm"
-            >
-              <h3 className="text-blue-700 font-bold hover:underline">{job.title}</h3>
-              <p className="text-xs text-gray-500 mt-1">Posted on: {job.postDate}</p>
-            </Link>
-          ))}
-          {filteredJobs.length === 0 && (
+          {filteredJobs.length > 0 ? (
+            filteredJobs.map(job => (
+              <Link 
+                key={job.id} 
+                to={`/details/${job.id}`} 
+                className="block p-3 border border-gray-200 hover:bg-gray-50 transition-colors rounded shadow-sm"
+              >
+                <h3 className="text-blue-700 font-bold hover:underline">{job.title}</h3>
+                <p className="text-xs text-gray-500 mt-1">Posted on: {job.postDate}</p>
+              </Link>
+            ))
+          ) : (
             <p className="text-gray-500 italic">No updates available for this category yet.</p>
           )}
         </div>
       </div>
-      
-      {/* WhatsApp and Telegram together at bottom of category page */}
-      <div className="mt-8 space-y-4">
-        <WhatsAppJoin />
-        <TelegramJoin />
-      </div>
+      <WhatsAppJoin />
     </motion.div>
   );
 };
@@ -608,10 +585,6 @@ const ContactPage = () => (
       <p className="text-gray-500 text-lg">Have questions? We're here to help you navigate your career path.</p>
     </div>
     <ContactForm />
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <WhatsAppJoin />
-      <TelegramJoin />
-    </div>
   </motion.div>
 );
 
