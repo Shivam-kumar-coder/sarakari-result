@@ -140,7 +140,7 @@ const GridSection = ({ title, items, colorClass, icon: Icon }: { title: string, 
       </span>
     </div>
     <div className="divide-y divide-gray-50">
-      {items.map((item) => (
+      {items.slice(0, 5).map((item) => (
         <Link 
           key={item.id} 
           to={`/details/${item.id}`}
@@ -213,8 +213,8 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
         <meta name="description" content="Sarkari Result - Get latest updates on Sarkari Results, Latest Jobs, Admit Cards, Syllabus, Answer Keys and Admissions. Official portal for government job seekers." />
       </Helmet>
       
-      {/* Official Banner - Reduced height and padding */}
-      <div className="bg-gradient-to-b from-blue-50 to-white border-2 border-blue-200 p-3 text-center shadow-md max-w-2xl mx-auto rounded-lg">
+      {/* Official Banner - Full width */}
+      <div className="bg-gradient-to-b from-blue-50 to-white border-2 border-blue-200 p-4 md:p-6 text-center shadow-md w-full rounded-lg">
         <h1 className="text-2xl md:text-4xl font-black text-blue-900 tracking-tighter uppercase">Sarkari Result</h1>
         <p className="text-red-600 font-black text-lg md:text-xl uppercase tracking-widest">www.sarkariresult.com</p>
         <div className="w-16 h-0.5 bg-red-500 mx-auto my-2"></div>
@@ -292,7 +292,7 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
           >
             <MessageCircle size={14} /> Join Our WhatsApp Group For Latest Updates! <span className="text-red-500 ml-1">New!</span>
           </a>
-          {jobs.map(j => (
+          {jobs.slice(0, 10).map(j => (
             <Link key={j.id} to={`/details/${j.id}`} className="mx-8 font-bold text-sm text-blue-700 hover:text-red-600 transition-colors">
               {j.title} <span className="text-red-500 ml-1">New!</span>
             </Link>
@@ -306,33 +306,49 @@ const HomePage = ({ jobs }: { jobs: JobData[] }) => {
         <GridSection title="Latest Jobs" items={latestJobs} colorClass="bg-red-700" icon={Briefcase} />
       </div>
 
-      {/* Useful Links Section */}
-      <div className="bg-white border-2 border-gray-300 p-4 shadow-sm">
-        <h3 className="text-blue-800 font-black text-lg uppercase border-b-2 border-gray-200 pb-2 mb-4">Useful Links & Services</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm font-bold">
-          <Link to="/syllabus" className="text-blue-700 hover:underline">• Exam Syllabus</Link>
-          <Link to="/answer-key" className="text-blue-700 hover:underline">• Answer Keys</Link>
-          <Link to="/admission" className="text-blue-700 hover:underline">• Admission Form</Link>
-          <Link to="/important" className="text-blue-700 hover:underline">• Important Links</Link>
-          <Link to="/certificate" className="text-blue-700 hover:underline">• Certificate Verification</Link>
-          <Link to="/pan-card" className="text-blue-700 hover:underline">• PAN Card Online</Link>
-          <Link to="/voter-id" className="text-blue-700 hover:underline">• Voter ID Online</Link>
-          <Link to="/contact" className="text-blue-700 hover:underline">• Contact Us</Link>
+      {/* Useful Links Section - Full Width with bigger box */}
+      <div className="bg-white border-2 border-gray-300 p-6 shadow-sm w-full">
+        <h3 className="text-blue-800 font-black text-xl uppercase border-b-2 border-gray-200 pb-3 mb-4">Useful Links & Services</h3>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-base font-bold">
+          <Link to="/syllabus" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
+            <span className="w-2 h-2 bg-blue-600 rounded-full"></span> Exam Syllabus
+          </Link>
+          <Link to="/answer-key" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
+            <span className="w-2 h-2 bg-green-600 rounded-full"></span> Answer Keys
+          </Link>
+          <Link to="/admission" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
+            <span className="w-2 h-2 bg-purple-600 rounded-full"></span> Admission Form
+          </Link>
+          <Link to="/important" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
+            <span className="w-2 h-2 bg-red-600 rounded-full"></span> Important Links
+          </Link>
+          <Link to="/certificate" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
+            <span className="w-2 h-2 bg-yellow-600 rounded-full"></span> Certificate Verification
+          </Link>
+          <Link to="/pan-card" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
+            <span className="w-2 h-2 bg-orange-600 rounded-full"></span> PAN Card Online
+          </Link>
+          <Link to="/voter-id" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
+            <span className="w-2 h-2 bg-indigo-600 rounded-full"></span> Voter ID Online
+          </Link>
+          <Link to="/contact" className="text-blue-700 hover:underline hover:text-blue-900 transition-colors flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
+            <span className="w-2 h-2 bg-pink-600 rounded-full"></span> Contact Us
+          </Link>
         </div>
       </div>
 
-      {/* Additional Sections */}
+      {/* Additional Sections - With 5 items limit */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {['Answer Key', 'Syllabus', 'Admission', 'Important'].map((cat) => (
           <div key={cat} className="bg-white border-2 border-gray-300 overflow-hidden shadow-sm">
-            <h3 className="bg-gray-800 text-white font-black uppercase tracking-widest text-xs p-2 text-center">{cat}</h3>
-            <div className="p-3 space-y-2">
+            <h3 className="bg-gray-800 text-white font-black uppercase tracking-widest text-sm p-3 text-center">{cat}</h3>
+            <div className="p-4 space-y-3">
               {jobs.filter(j => j.category === cat).slice(0, 5).map(item => (
-                <Link key={item.id} to={`/details/${item.id}`} className="block text-xs font-bold text-blue-700 hover:underline truncate">
+                <Link key={item.id} to={`/details/${item.id}`} className="block text-sm font-bold text-blue-700 hover:underline truncate border-b border-gray-100 pb-2 last:border-0">
                   {item.title}
                 </Link>
               ))}
-              <Link to={`/${cat.toLowerCase()}`} className="block text-[10px] font-black text-gray-400 uppercase mt-2 text-center hover:text-blue-600 transition-colors">
+              <Link to={`/${cat.toLowerCase()}`} className="block text-xs font-black text-gray-500 uppercase mt-3 text-center hover:text-blue-600 transition-colors bg-gray-50 py-2 rounded">
                 View All {cat} &rarr;
               </Link>
             </div>
@@ -356,8 +372,18 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
 
   if (!job) return <div className="text-center py-20">Job not found</div>;
 
-  // Fix for the URL - extract just the ID if it contains a domain
-  const cleanId = id?.includes('.') ? id.split('.')[0] : id;
+  // Proper URL generate karne ka function
+  const getApplyLink = () => {
+    if (job.link && job.link !== '#' && job.link !== '') {
+      if (job.link.startsWith('http://') || job.link.startsWith('https://')) {
+        return job.link;
+      }
+      return `https://${job.link}`;
+    }
+    return 'https://www.sarkariresult.com';
+  };
+
+  const applyLink = getApplyLink();
 
   return (
     <motion.div 
@@ -475,16 +501,21 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 p-4 gap-4 items-center">
               <div className="flex flex-col md:flex-row gap-4 items-center justify-center w-full">
                 <a 
-                  href={job.link && job.link !== '#' ? job.link : 'https://'} 
+                  href={applyLink}
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="bg-blue-700 hover:bg-blue-800 text-white font-black px-6 py-3 rounded text-sm uppercase tracking-widest flex items-center gap-2 shadow-md w-full md:w-auto justify-center"
+                  className="bg-blue-700 hover:bg-blue-800 text-white font-black px-6 py-3 rounded text-sm uppercase tracking-widest flex items-center gap-2 shadow-md w-full md:w-auto justify-center transition-all hover:scale-105"
+                  onClick={(e) => {
+                    if (applyLink === 'https://www.sarkariresult.com') {
+                      console.log('Using default link');
+                    }
+                  }}
                 >
                   Apply Online <ExternalLink size={16} />
                 </a>
                 <button 
                   onClick={() => setShowForm(!showForm)}
-                  className="bg-red-600 hover:bg-red-700 text-white font-black px-6 py-3 rounded text-sm uppercase tracking-widest flex items-center gap-2 shadow-md w-full md:w-auto justify-center"
+                  className="bg-red-600 hover:bg-red-700 text-white font-black px-6 py-3 rounded text-sm uppercase tracking-widest flex items-center gap-2 shadow-md w-full md:w-auto justify-center transition-all hover:scale-105"
                 >
                   {showForm ? "Close Form" : "Form Fillup Request"} <Search size={16} />
                 </button>
@@ -511,10 +542,10 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
 
             <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
               <a 
-                href={job.link && job.link !== '#' ? job.link : 'https://www.sarkariresult.com'} 
+                href={applyLink}
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-blue-700 font-bold hover:underline flex items-center gap-2 justify-center md:justify-start"
+                className="text-blue-700 font-bold hover:underline flex items-center gap-2 justify-center md:justify-start transition-colors"
               >
                 <FileText size={16} /> Download Official Notification
               </a>
@@ -522,7 +553,7 @@ const DetailPage = ({ jobs }: { jobs: JobData[] }) => {
                 href="https://www.sarkariresult.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-blue-700 font-bold hover:underline flex items-center gap-2 justify-center md:justify-start"
+                className="text-blue-700 font-bold hover:underline flex items-center gap-2 justify-center md:justify-start transition-colors"
               >
                 <Home size={16} /> Official Website
               </a>
@@ -560,18 +591,17 @@ const CategoryPage = ({ jobs, category }: { jobs: JobData[], category: string })
           {category} Updates
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredJobs.length > 0 ? (
-            filteredJobs.map(job => (
-              <Link 
-                key={job.id} 
-                to={`/details/${job.id}`} 
-                className="block p-3 border border-gray-200 hover:bg-gray-50 transition-colors rounded shadow-sm"
-              >
-                <h3 className="text-blue-700 font-bold hover:underline">{job.title}</h3>
-                <p className="text-xs text-gray-500 mt-1">Posted on: {job.postDate}</p>
-              </Link>
-            ))
-          ) : (
+          {filteredJobs.slice(0, 10).map(job => (
+            <Link 
+              key={job.id} 
+              to={`/details/${job.id}`} 
+              className="block p-3 border border-gray-200 hover:bg-gray-50 transition-colors rounded shadow-sm"
+            >
+              <h3 className="text-blue-700 font-bold hover:underline">{job.title}</h3>
+              <p className="text-xs text-gray-500 mt-1">Posted on: {job.postDate}</p>
+            </Link>
+          ))}
+          {filteredJobs.length === 0 && (
             <p className="text-gray-500 italic">No updates available for this category yet.</p>
           )}
         </div>
