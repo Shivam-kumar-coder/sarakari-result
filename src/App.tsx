@@ -608,14 +608,6 @@ export default function App() {
       <div className="min-h-screen flex flex-col font-sans">
         <Header />
         
-        {/* Setup Instructions (Only visible if no Sheet ID is provided) */}
-        {!SHEET_ID && (
-          <div className="bg-yellow-50 border-b border-yellow-200 py-2 px-4 text-center text-xs text-yellow-800">
-            <strong>Pro Tip:</strong> To sync with your own data, add <code>VITE_GOOGLE_SHEET_ID</code> to your environment variables. 
-            Make sure your sheet is "Public" (Anyone with link can view).
-          </div>
-        )}
-
         <main className="flex-grow max-w-7xl mx-auto px-4 py-8 w-full">
           <AnimatePresence mode="wait">
             {loading ? (
